@@ -18,7 +18,7 @@ const Home = () => {
           <h1 className="mb-16 text-2xl font-semibold text-center">
             User Review
           </h1>
-          <UserReview />
+          <UserReview>lksdsjflkjsdlkfjlksdjflkjsd</UserReview>
         </div>
         <div className="my-24">
           <h1 className="mb-16 text-2xl font-semibold text-center">
