@@ -1,7 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { createContext, useEffect, useState } from "react";
-import { app } from "./../firebase-config/firebase";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -11,6 +12,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
+import { app } from "../firebase-config/firebase";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -36,14 +38,13 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      console.log(currentUser);
     });
-    return (
-      () => {
-        return unsubscribe();
-      },
-      []
-    );
-  });
+    return () => {
+      return unsubscribe();
+    };
+  }, []);
+
   const authInfo = {
     user,
     loading,
