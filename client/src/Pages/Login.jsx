@@ -2,6 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
+import GoogleLogin from "../components/login-registration/GoogleLogin";
 
 const Login = () => {
   const { Login } = useAuth();
@@ -72,6 +73,8 @@ const Login = () => {
                 Login
               </button>
             </div>
+            {/* Google Login */}
+            <GoogleLogin />
             <p className="my-4 text-sm font-light">
               New here?
               <Link to={"/register"} className="text-primary">

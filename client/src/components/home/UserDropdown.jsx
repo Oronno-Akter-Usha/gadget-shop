@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const UserDropdown = () => {
@@ -19,10 +20,10 @@ const UserDropdown = () => {
       </div>
       <ul
         tabIndex={0}
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow flex flex-col gap-2"
       >
         <li>
-          <a>Dashboard</a>
+          <NavLink>Dashboard</NavLink>
         </li>
         <li>
           <button
