@@ -21,10 +21,25 @@ const client = new MongoClient(url, {
   },
 });
 
+const userCollection = client.db("gadgetShop").collection("users");
+const productCollection = client.db("gadgetShop").collection("products");
+
 const dbConnect = async () => {
   try {
     client.connect();
     console.log("Database connected successfully");
+
+    // insert user
+    app.post("/user", async (req, res) => {
+      const user = req.body;
+      const query = { email: user.email };
+      const existigUser = await userCollection.findOne(query);
+      if (existigUser) {
+        return res.send({ message: "User already exists" });
+      }
+      const result = await userCollection.insertOne(user);
+      res.send(result);
+    });
   } catch (error) {
     console.log(error.name, erroe.massage);
   }
