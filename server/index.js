@@ -30,13 +30,15 @@ const dbConnect = async () => {
     console.log("Database connected successfully");
 
     // insert user
-    app.post("/user", async (req, res) => {
+    app.post("/users", async (req, res) => {
       const user = req.body;
       const query = { email: user.email };
       const existigUser = await userCollection.findOne(query);
+
       if (existigUser) {
         return res.send({ message: "User already exists" });
       }
+
       const result = await userCollection.insertOne(user);
       res.send(result);
     });
