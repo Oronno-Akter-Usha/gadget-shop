@@ -23,7 +23,7 @@ const UserDropdown = () => {
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow flex flex-col gap-2"
       >
         <li>
-          <NavLink to="/dashboard">Dashboard</NavLink>
+          <NavLink to="/dashboard/overview">Dashboard</NavLink>
         </li>
         <li>
           <button

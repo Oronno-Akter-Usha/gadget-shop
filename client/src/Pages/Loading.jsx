@@ -1,4 +1,4 @@
-import GirdLoader from "react-spinners";
+import GirdLoader from "react-spinners/GridLoader";
 
 const Loading = () => {
   return (
