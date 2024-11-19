@@ -14,7 +14,7 @@ const UserDropdown = () => {
         <div className="w-10 rounded-full">
           <img
             alt="Tailwind CSS Navbar component"
-            src={`${user?.photoURL || "/public/user.jpg"}`}
+            src={`${user?.photoURL || "/user.jpg"}`}
           />
         </div>
       </div>
@@ -23,7 +23,7 @@ const UserDropdown = () => {
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow flex flex-col gap-2"
       >
         <li>
-          <NavLink>Dashboard</NavLink>
+          <NavLink to="/dashboard">Dashboard</NavLink>
         </li>
         <li>
           <button
