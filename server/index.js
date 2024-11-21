@@ -88,6 +88,29 @@ const dbConnect = async () => {
       const result = await productCollection.insertOne(product);
       res.send(result);
     });
+
+    // get product
+    app.get("/all-products", async (req, res) => {
+      const { title, sort, category, brand } = req.query;
+      const query = {};
+
+      if (title) {
+        query.title = { $regex: title, $options: "i" };
+      }
+
+      if (category) {
+        query.category = { $regex: category, $options: "i" };
+      }
+      if (brand) {
+        query.brand = brand;
+      }
+      const sortOption = sort === "asc" ? 1 : -1;
+      const products = await productCollection
+        .find(query)
+        .sort({ price: sortOption })
+        .toArray();
+      res.json(products);
+    });
   } catch (error) {
     console.log(error.name, error.massage);
   }
