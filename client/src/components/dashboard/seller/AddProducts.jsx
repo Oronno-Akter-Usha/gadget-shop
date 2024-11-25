@@ -8,6 +8,7 @@ const AddProducts = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const { user } = useAuth();
@@ -51,6 +52,7 @@ const AddProducts = () => {
           });
         }
       });
+    reset();
   };
 
   return (

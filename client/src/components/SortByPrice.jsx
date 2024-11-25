@@ -1,6 +1,12 @@
-const SortByPrice = () => {
+/* eslint-disable react/prop-types */
+const SortByPrice = ({ setSort }) => {
   return (
-    <select className="select select-bordered w-full max-w-xs">
+    <select
+      className="select select-bordered w-full max-w-xs"
+      onChange={(e) => {
+        setSort(e.target.value);
+      }}
+    >
       <option disabled selected>
         price
       </option>

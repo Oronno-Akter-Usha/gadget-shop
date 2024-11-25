@@ -91,7 +91,7 @@ const dbConnect = async () => {
 
     // get product
     app.get("/all-products", async (req, res) => {
-      const { title, sort, category, brand } = req.query;
+      const { title, sort, category, brand, page = 1, limit = 9 } = req.query;
       const query = {};
 
       if (title) {
@@ -104,12 +104,26 @@ const dbConnect = async () => {
       if (brand) {
         query.brand = brand;
       }
+
+      const pageNumber = Number(page);
+      const limitNumber = Number(limit);
+
       const sortOption = sort === "asc" ? 1 : -1;
       const products = await productCollection
         .find(query)
+        .skip((pageNumber - 1) * limitNumber)
+        .limit(limitNumber)
         .sort({ price: sortOption })
         .toArray();
-      res.json(products);
+
+      const totalProducts = await productCollection.countDocuments(query);
+
+      const brands = [...new Set(products.map((product) => product.brand))];
+      const categories = [
+        ...new Set(products.map((product) => product.category)),
+      ];
+
+      res.json({ products, brands, categories, totalProducts });
     });
   } catch (error) {
     console.log(error.name, error.massage);

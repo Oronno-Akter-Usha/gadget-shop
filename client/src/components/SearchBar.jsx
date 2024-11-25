@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { IoSearchSharp } from "react-icons/io5";
 
-const SearchBar = () => {
+const SearchBar = ({ handleSearch }) => {
   return (
-    <form>
+    <form onSubmit={handleSearch}>
       <div className="border border-black rounded-md flex items-center justify-between">
         <input
           type="text"
