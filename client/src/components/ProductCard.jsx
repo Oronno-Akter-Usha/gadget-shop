@@ -1,5 +1,30 @@
 /* eslint-disable react/prop-types */
-const ProductCard = ({ product }) => {
+import axios from "axios";
+import useUserData from "./../hooks/useUserData";
+import Swal from "sweetalert2";
+const ProductCard = ({ product, isInWishlist }) => {
+  const useData = useUserData();
+  const userEmail = useData.email;
+
+  const handleWishlist = async () => {
+    await axios
+      .patch("http://localhost:4000/wishlist/add", {
+        userEmail: userEmail,
+        productId: product._id,
+      })
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Product add to your wishlist",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+
   return (
     <div className="rounded-md border shadow-md">
       <figure>
@@ -24,7 +49,21 @@ const ProductCard = ({ product }) => {
         </p>
 
         <div className="mt-4">
-          <button className="btn w-full btn-sm">Add to wishlist</button>
+          {isInWishlist ? (
+            <button
+              className="btn w-full btn-sm bg-red-500 text-white"
+              onClick={handleWishlist}
+            >
+              Remove from wishlist
+            </button>
+          ) : (
+            <button
+              className="btn w-full btn-sm btn-primary"
+              onClick={handleWishlist}
+            >
+              Add to wishlist
+            </button>
+          )}
         </div>
       </div>
     </div>
