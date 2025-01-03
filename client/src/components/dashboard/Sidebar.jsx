@@ -35,7 +35,7 @@ const Sidebar = () => {
   const userData = useUserData();
   const { Logout } = useAuth();
   return (
-    <div className="bg-gray-100 border-r-2 border-black h-full px-4 py-8">
+    <div className="bg-gray-100 border-r-2 border-black h-full px-4 py-8 min-h-screen">
       <h1 className="text-3xl font-bold mb-8">Gadget Shop</h1>
       <ul className="flex flex-col gap-2">
         <li className="p-2 border border-black rounded-md">

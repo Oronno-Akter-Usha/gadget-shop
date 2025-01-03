@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import useUserData from "../../../hooks/useUserData";
 import axios from "axios";
@@ -6,6 +7,7 @@ import ProductCard from "../../../components/ProductCard";
 
 const MyWishlist = () => {
   const [wishlist, setWishlist] = useState([]);
+  const [latestData, setLatestData] = useState(true);
   const [loading, setLoading] = useState(false);
   const userData = useUserData();
   const token = localStorage.getItem("access-token");
@@ -27,7 +29,7 @@ const MyWishlist = () => {
     if (userData._id && token) {
       fetchWishlist();
     }
-  }, [token, userData._id]);
+  }, [token, userData._id, latestData]);
 
   return (
     <div>
@@ -45,6 +47,7 @@ const MyWishlist = () => {
                     product={product}
                     key={product._id}
                     isInWishlist
+                    setLatestData={setLatestData}
                   />
                 ))}
               </div>

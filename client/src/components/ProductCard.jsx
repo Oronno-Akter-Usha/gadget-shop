@@ -2,7 +2,7 @@
 import axios from "axios";
 import useUserData from "./../hooks/useUserData";
 import Swal from "sweetalert2";
-const ProductCard = ({ product, isInWishlist }) => {
+const ProductCard = ({ product, isInWishlist, setLatestData }) => {
   const useData = useUserData();
   const userEmail = useData.email;
 
@@ -21,6 +21,26 @@ const ProductCard = ({ product, isInWishlist }) => {
             showConfirmButton: false,
             timer: 1500,
           });
+        }
+      });
+  };
+
+  const handleRemoveFromWishlist = async () => {
+    await axios
+      .patch("http://localhost:4000/wishlist/remove", {
+        userEmail: userEmail,
+        productId: product._id,
+      })
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Product remove from your wishlist",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setLatestData((pre) => !pre);
         }
       });
   };
@@ -52,7 +72,7 @@ const ProductCard = ({ product, isInWishlist }) => {
           {isInWishlist ? (
             <button
               className="btn w-full btn-sm bg-red-500 text-white"
-              onClick={handleWishlist}
+              onClick={handleRemoveFromWishlist}
             >
               Remove from wishlist
             </button>
